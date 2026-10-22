@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "bookingkoala": {
+      "command": "/path/to/bookingkoala-api-mcp-server/.venv/bin/bookingkoala-mcp",
+      "args": ["mcp"]
+    }
+  }
+}
