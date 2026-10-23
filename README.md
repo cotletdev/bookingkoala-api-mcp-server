@@ -8,11 +8,11 @@ BookingKoala has no public API and no official MCP server. Its API key only conn
 - **REST API** on `http://127.0.0.1:8787/api/v1/bookingkoala`, with OpenAPI docs at `/docs`. [Setup](#rest-api)
 - **Python**: `call("list_bookings", status="unassigned")`, plus 12 ready scripts in [`examples/`](examples/).
 
-It is for technical people who want to run it themselves, **for personal use only** ([license](#license)). If you want it running 24/7 on a server, kept working when BookingKoala changes its app, for a team or a business, use the [hosted version at cotlet.dev](https://cotlet.dev/integrations/bookingkoala-api-mcp-server).
+It is for technical people who want to run it themselves, **for noncommercial use only** ([license](#license)). If you want it running 24/7 on a server, kept working when BookingKoala changes its app, for a team or a business, use the [hosted version at cotlet.dev](https://cotlet.dev/integrations/bookingkoala-api-mcp-server).
 
 [![BookingKoala MCP server](https://img.shields.io/badge/BookingKoala%20MCP-17%20tools-6d4aef)](#all-17-tools)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-141318)](#requirements)
-[![License: personal use](https://img.shields.io/badge/license-personal%20use-141318)](LICENSE)
+[![License: PolyForm Noncommercial 1.0.0](https://img.shields.io/badge/license-PolyForm%20Noncommercial-141318)](LICENSE)
 
 ```bash
 git clone https://github.com/cotletdev/bookingkoala-api-mcp-server.git && cd bookingkoala-api-mcp-server
@@ -368,7 +368,7 @@ The REST API answers `{"error": "<code>", "message": "..."}`. The MCP server ret
 | When BookingKoala changes its app | `git pull` once we have fixed it | fixed for you, every tool tested daily |
 | Approvals | your MCP client asks per call | assignments, quotes, invoices and refunds wait for your OK, switchable per tool |
 | Works with | MCP clients on your machine, local scripts | Claude.ai and ChatGPT connectors, n8n, Make, Zapier, any HTTP client |
-| Who may use it | you, for personal use | teams, businesses, agencies |
+| Who may use it | you, for noncommercial use | teams, businesses, agencies |
 | Price | free | free 7-day trial with 2,000 credits, no card; then one-time packs from $29 for 5,000 credits |
 
 On the hosted version a successful call uses 20 to 30 credits (25 for most tools), failed calls are free, and the Cloud Browser uses 50 credits a day while it has an app enabled for agents. [Full pricing](https://cotlet.dev/pricing).
@@ -397,23 +397,23 @@ To read your BookingKoala session without your password. Chrome is used once per
 Calls fail with `auth_expired`. With Chrome remote debugging on, the server reads the new session on the next call (click Allow when Chrome asks). Otherwise run `bookingkoala-mcp connect` again.
 
 **Can it run on a VPS or in Docker?**
-Technically yes, with `BOOKINGKOALA_STORE` and `BOOKINGKOALA_AUTH_TOKEN`. BookingKoala then sees your session from a datacenter IP, and the license allows it only on a server you alone use. For an always-on setup the hosted version keeps your session in your own Cloud Browser on a fixed IP.
+Technically yes, with `BOOKINGKOALA_STORE` and `BOOKINGKOALA_AUTH_TOKEN`. BookingKoala then sees your session from a datacenter IP. For an always-on setup the hosted version keeps your session in your own Cloud Browser on a fixed IP.
 
 **Can I use it for my cleaning business?**
-No. The license is for personal use by one person, and running your store is business use. For your company, use [Cotlet](https://cotlet.dev) or write to [contact@cotlet.dev](mailto:contact@cotlet.dev).
+No. The license allows noncommercial use only, and running your store is business use. For your company, use [Cotlet](https://cotlet.dev) or write to [contact@cotlet.dev](mailto:contact@cotlet.dev).
 
 **Is it open source?**
-The source is public, the license is not an open source license: personal use only, no business use, no hosting for others.
+The source is public, the license is not an open source license: noncommercial use only, no business use.
 
 **A tool broke or I need another one.**
 [Open an issue](https://github.com/cotletdev/bookingkoala-api-mcp-server/issues) with the tool name and the error message.
 
 ## License
 
-[Cotlet Personal Use License 1.0](LICENSE). In short:
+[PolyForm Noncommercial License 1.0.0](LICENSE). In short:
 
-- **Allowed:** one person, on their own computers, with their own BookingKoala accounts, for their own purposes. Changing the code for yourself, and a GitHub fork under the same license.
-- **Not allowed:** any use in or for a company or organization, your own business included; letting other people use your instance (shared server, team machine, cloud service); selling or offering it or a service built on it.
+- **Allowed:** noncommercial use: you, for your own personal purposes with your own BookingKoala account, or a charity, school, public research or government body. Changing the code, and sharing it under the same license.
+- **Not allowed:** any commercial use, your own business included; client work; selling or offering it, or a service built on it.
 
 ---
 
