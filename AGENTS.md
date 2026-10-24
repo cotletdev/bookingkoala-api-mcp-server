@@ -65,7 +65,7 @@ Errors come as `<code>: <message>`. `auth_expired` means BookingKoala signed the
 | `bookingkoala_api_mcp/app.py` | app name, domains, session cookie, account paths, REST prefix | Rarely |
 | `bookingkoala_api_mcp/core/` | `@tool` declaration, errors, the HTTP client with the session (`context.py`), the account guard, the profile tools read | Yes |
 | `bookingkoala_api_mcp/session.py` | reading cookies and the time zone from Chrome over CDP, the session file | Yes |
-| `bookingkoala_api_mcp/runner.py`, `api.py`, `mcp_server.py`, `cli.py` | tool registry, REST API, MCP server, command line | Yes |
+| `bookingkoala_api_mcp/runner.py`, `api.py`, `mcp_server.py`, `mcp_context.py`, `cli.py` | tool registry, REST API, MCP server, its prompts and resources, command line | Yes |
 | `examples/` | scripts for common jobs | Yes |
 
 A new tool is a new file in `bookingkoala_api_mcp/bookingkoala/tools/` with a `@tool(...)` declaration (name, access, input schema, `route`). The registry finds it, and the REST API, the MCP server and the CLI show it without other changes. Never add a tool that refunds, charges or changes the user's own BookingKoala plan.
