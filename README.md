@@ -16,11 +16,10 @@ It is for technical people who want to run it themselves, **for noncommercial us
 [![MCP Badge](https://lobehub.com/badge/mcp/cotletdev-bookingkoala-api-mcp-server)](https://lobehub.com/mcp/cotletdev-bookingkoala-api-mcp-server)
 
 ```bash
-git clone https://github.com/cotletdev/bookingkoala-api-mcp-server.git && cd bookingkoala-api-mcp-server
-python3 -m venv .venv && . .venv/bin/activate && pip install -e .
+uv tool install bookingkoala-api-mcp                  # or: pip install bookingkoala-api-mcp
 bookingkoala-mcp connect                           # reads your BookingKoala session from Chrome
 bookingkoala-mcp call list_bookings status=upcoming
-claude mcp add bookingkoala -- "$PWD/.venv/bin/bookingkoala-mcp" mcp
+claude mcp add bookingkoala -- uvx --from bookingkoala-api-mcp bookingkoala-mcp mcp
 ```
 
 ## Contents
@@ -63,6 +62,17 @@ BookingKoala keeps the session for 30 days in the `IRON_GATEWAY_CTX` cookie of y
 
 ## Install
 
+From [PyPI](https://pypi.org/project/bookingkoala-api-mcp/):
+
+```bash
+uv tool install bookingkoala-api-mcp       # or: pipx install bookingkoala-api-mcp, or: pip install bookingkoala-api-mcp
+bookingkoala-mcp --version
+```
+
+MCP clients can also run it with no install: `uvx --from bookingkoala-api-mcp bookingkoala-mcp mcp`.
+
+From source:
+
 ```bash
 git clone https://github.com/cotletdev/bookingkoala-api-mcp-server.git
 cd bookingkoala-api-mcp-server
@@ -76,7 +86,7 @@ With [uv](https://docs.astral.sh/uv/): `uv venv && uv pip install -e .`, then `u
 
 Setting it up with an AI agent (Claude Code, Codex, Cursor)? Open it in this folder and ask it to set up the repo: [`AGENTS.md`](AGENTS.md) tells it every step, and it asks you only for the steps in Chrome.
 
-To update: `git pull && pip install -e .`. We copy every change of the hosted BookingKoala tools into this repo.
+To update: `uv tool upgrade bookingkoala-api-mcp` (or `pip install -U bookingkoala-api-mcp`), from source `git pull && pip install -e .`. We copy every change of the hosted BookingKoala tools into this repo.
 
 ## Connect your Chrome
 
@@ -143,9 +153,9 @@ The MCP server lists every tool with its input schema, a description written for
 ### Claude Code
 
 ```bash
-claude mcp add bookingkoala -- /path/to/bookingkoala-api-mcp-server/.venv/bin/bookingkoala-mcp mcp
+claude mcp add bookingkoala -- uvx --from bookingkoala-api-mcp bookingkoala-mcp mcp
 # read only:
-claude mcp add bookingkoala -- /path/to/bookingkoala-api-mcp-server/.venv/bin/bookingkoala-mcp mcp --read-only
+claude mcp add bookingkoala -- uvx --from bookingkoala-api-mcp bookingkoala-mcp mcp --read-only
 ```
 
 ### Claude Desktop
@@ -156,8 +166,8 @@ claude mcp add bookingkoala -- /path/to/bookingkoala-api-mcp-server/.venv/bin/bo
 {
   "mcpServers": {
     "bookingkoala": {
-      "command": "/path/to/bookingkoala-api-mcp-server/.venv/bin/bookingkoala-mcp",
-      "args": ["mcp"]
+      "command": "uvx",
+      "args": ["--from", "bookingkoala-api-mcp", "bookingkoala-mcp", "mcp"]
     }
   }
 }
@@ -173,8 +183,8 @@ claude mcp add bookingkoala -- /path/to/bookingkoala-api-mcp-server/.venv/bin/bo
 
 ```toml
 [mcp_servers.bookingkoala]
-command = "/path/to/bookingkoala-api-mcp-server/.venv/bin/bookingkoala-mcp"
-args = ["mcp"]
+command = "uvx"
+args = ["--from", "bookingkoala-api-mcp", "bookingkoala-mcp", "mcp"]
 ```
 
 ### Over HTTP
