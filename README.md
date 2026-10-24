@@ -1,5 +1,7 @@
 # BookingKoala API and MCP server, self-hosted
 
+<!-- mcp-name: dev.cotlet/bookingkoala -->
+
 A **BookingKoala API** and a **BookingKoala MCP server** you run on your own computer, in Python, on the session of your own Google Chrome. 17 of the 18 BookingKoala tools we run in production at [Cotlet](https://cotlet.dev/integrations/bookingkoala-api-mcp-server): bookings, drafts and quotes, customers, providers and teams, charges, invoices and the store dashboard.
 
 BookingKoala has no public API and no official MCP server. Its API key only connects Zapier and Make, which react to new events and can write back one thing, a lead. This repo gives you both:
@@ -19,7 +21,7 @@ It is for technical people who want to run it themselves, **for noncommercial us
 uv tool install bookingkoala-api-mcp                  # or: pip install bookingkoala-api-mcp
 bookingkoala-mcp connect                           # reads your BookingKoala session from Chrome
 bookingkoala-mcp call list_bookings status=upcoming
-claude mcp add bookingkoala -- uvx --from bookingkoala-api-mcp bookingkoala-mcp mcp
+claude mcp add bookingkoala -- uvx bookingkoala-api-mcp mcp
 ```
 
 ## Contents
@@ -69,7 +71,7 @@ uv tool install bookingkoala-api-mcp       # or: pipx install bookingkoala-api-m
 bookingkoala-mcp --version
 ```
 
-MCP clients can also run it with no install: `uvx --from bookingkoala-api-mcp bookingkoala-mcp mcp`.
+MCP clients can also run it with no install: `uvx bookingkoala-api-mcp mcp`.
 
 From source:
 
@@ -153,9 +155,9 @@ The MCP server lists every tool with its input schema, a description written for
 ### Claude Code
 
 ```bash
-claude mcp add bookingkoala -- uvx --from bookingkoala-api-mcp bookingkoala-mcp mcp
+claude mcp add bookingkoala -- uvx bookingkoala-api-mcp mcp
 # read only:
-claude mcp add bookingkoala -- uvx --from bookingkoala-api-mcp bookingkoala-mcp mcp --read-only
+claude mcp add bookingkoala -- uvx bookingkoala-api-mcp mcp --read-only
 ```
 
 ### Claude Desktop
@@ -167,7 +169,7 @@ claude mcp add bookingkoala -- uvx --from bookingkoala-api-mcp bookingkoala-mcp 
   "mcpServers": {
     "bookingkoala": {
       "command": "uvx",
-      "args": ["--from", "bookingkoala-api-mcp", "bookingkoala-mcp", "mcp"]
+      "args": ["bookingkoala-api-mcp", "mcp"]
     }
   }
 }
@@ -184,7 +186,7 @@ claude mcp add bookingkoala -- uvx --from bookingkoala-api-mcp bookingkoala-mcp 
 ```toml
 [mcp_servers.bookingkoala]
 command = "uvx"
-args = ["--from", "bookingkoala-api-mcp", "bookingkoala-mcp", "mcp"]
+args = ["bookingkoala-api-mcp", "mcp"]
 ```
 
 ### Over HTTP

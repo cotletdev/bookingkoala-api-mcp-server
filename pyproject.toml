@@ -24,6 +24,7 @@ Source = "https://github.com/cotletdev/bookingkoala-api-mcp-server"
 
 [project.scripts]
 bookingkoala-mcp = "bookingkoala_api_mcp.cli:main"
+bookingkoala-api-mcp = "bookingkoala_api_mcp.cli:main"
 
 [build-system]
 requires = ["hatchling>=1.27"]

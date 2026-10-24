@@ -3,9 +3,7 @@
     "bookingkoala": {
       "command": "uvx",
       "args": [
-        "--from",
         "bookingkoala-api-mcp",
-        "bookingkoala-mcp",
         "mcp"
       ]
     }
