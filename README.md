@@ -8,13 +8,13 @@ BookingKoala has no public API and no official MCP server. Its API key only conn
 
 - **MCP server** for Claude Code, Claude Desktop, Cursor, Codex and any MCP client, over stdio or HTTP. [Setup](#mcp-server)
 - **REST API** on `http://127.0.0.1:8787/api/v1/bookingkoala`, with OpenAPI docs at `/docs`. [Setup](#rest-api)
-- **Python**: `call("list_bookings", status="unassigned")`, plus 12 ready scripts in [`examples/`](examples/).
+- **Python**: `call("list_bookings", status="unassigned")`, plus 12 ready scripts in [`examples/`](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/examples/).
 
 It is for technical people who want to run it themselves, **for noncommercial use only** ([license](#license)). If you want it running 24/7 on a server, kept working when BookingKoala changes its app, for a team or a business, use the [hosted version at cotlet.dev](https://cotlet.dev/integrations/bookingkoala-api-mcp-server).
 
 [![BookingKoala MCP server](https://img.shields.io/badge/BookingKoala%20MCP-17%20tools-6d4aef)](#all-17-tools)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-141318)](#requirements)
-[![License: PolyForm Noncommercial 1.0.0](https://img.shields.io/badge/license-PolyForm%20Noncommercial-141318)](LICENSE)
+[![License: PolyForm Noncommercial 1.0.0](https://img.shields.io/badge/license-PolyForm%20Noncommercial-141318)](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/LICENSE)
 [![MCP Badge](https://lobehub.com/badge/mcp/cotletdev-bookingkoala-api-mcp-server)](https://lobehub.com/mcp/cotletdev-bookingkoala-api-mcp-server)
 
 ```bash
@@ -86,7 +86,7 @@ bookingkoala-mcp --version
 
 With [uv](https://docs.astral.sh/uv/): `uv venv && uv pip install -e .`, then `uv run bookingkoala-mcp ...`.
 
-Setting it up with an AI agent (Claude Code, Codex, Cursor)? Open it in this folder and ask it to set up the repo: [`AGENTS.md`](AGENTS.md) tells it every step, and it asks you only for the steps in Chrome.
+Setting it up with an AI agent (Claude Code, Codex, Cursor)? Open it in this folder and ask it to set up the repo: [`AGENTS.md`](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/AGENTS.md) tells it every step, and it asks you only for the steps in Chrome.
 
 To update: `uv tool upgrade bookingkoala-api-mcp` (or `pip install -U bookingkoala-api-mcp`), from source `git pull && pip install -e .`. We copy every change of the hosted BookingKoala tools into this repo.
 
@@ -177,7 +177,7 @@ claude mcp add bookingkoala -- uvx bookingkoala-api-mcp mcp --read-only
 
 ### Cursor
 
-`~/.cursor/mcp.json`, the same block as Claude Desktop. A ready copy is in [`mcp.json`](mcp.json).
+`~/.cursor/mcp.json`, the same block as Claude Desktop. A ready copy is in [`mcp.json`](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/mcp.json).
 
 ### Codex
 
@@ -256,22 +256,22 @@ call("assign_provider", booking_id=212, provider_id=3)
 
 Or one tool from the shell: `bookingkoala-mcp call list_customers search=whitfield`, or with a JSON object.
 
-Ready scripts in [`examples/`](examples/). Each prints JSON, takes `--out file.csv` or `--out file.json` where it makes sense, and `--help`:
+Ready scripts in [`examples/`](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/examples/). Each prints JSON, takes `--out file.csv` or `--out file.json` where it makes sense, and `--help`:
 
 | Script | What it does |
 |---|---|
-| [`list_bookings.py`](examples/list_bookings.py) | Bookings by status and date range: date, arrival time, customer, address, providers, total. |
-| [`export_customers.py`](examples/export_customers.py) | Customers to CSV or JSON: name, email, phone, tags, note. |
-| [`store_dashboard.py`](examples/store_dashboard.py) | Store totals for a date range: revenue, provider pay, bookings, ratings, referrals. |
-| [`assign_unassigned.py`](examples/assign_unassigned.py) | Gives each unassigned job to the provider with the fewest jobs that day. Shows the plan unless you pass `--assign`. |
-| [`assign_provider.py`](examples/assign_provider.py) | Assigns one booking, or its whole recurring schedule, to a provider or team. |
-| [`reschedule_day.py`](examples/reschedule_day.py) | Moves a closed day's recurring visits to their next visit date. Plan first, `--move` to do it. |
-| [`cancel_booking.py`](examples/cancel_booking.py) | Cancels one booking or the rest of its schedule, with no fee, after you confirm. |
-| [`rebook_customer.py`](examples/rebook_customer.py) | Copies a repeat customer's last visit into a draft. `--send-quote` emails their saved quote. |
-| [`send_quote.py`](examples/send_quote.py) | Lists saved drafts and quotes, or emails one quote with a link to book it. |
-| [`add_customer.py`](examples/add_customer.py) | Adds a customer after checking the email is not in the store yet. |
-| [`provider_pay_report.py`](examples/provider_pay_report.py) | Provider pay totals for a pay period, then each provider's payment logs. |
-| [`overdue_invoices.py`](examples/overdue_invoices.py) | Unpaid invoices past due. `--remind` sends each one to its customer again. |
+| [`list_bookings.py`](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/examples/list_bookings.py) | Bookings by status and date range: date, arrival time, customer, address, providers, total. |
+| [`export_customers.py`](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/examples/export_customers.py) | Customers to CSV or JSON: name, email, phone, tags, note. |
+| [`store_dashboard.py`](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/examples/store_dashboard.py) | Store totals for a date range: revenue, provider pay, bookings, ratings, referrals. |
+| [`assign_unassigned.py`](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/examples/assign_unassigned.py) | Gives each unassigned job to the provider with the fewest jobs that day. Shows the plan unless you pass `--assign`. |
+| [`assign_provider.py`](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/examples/assign_provider.py) | Assigns one booking, or its whole recurring schedule, to a provider or team. |
+| [`reschedule_day.py`](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/examples/reschedule_day.py) | Moves a closed day's recurring visits to their next visit date. Plan first, `--move` to do it. |
+| [`cancel_booking.py`](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/examples/cancel_booking.py) | Cancels one booking or the rest of its schedule, with no fee, after you confirm. |
+| [`rebook_customer.py`](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/examples/rebook_customer.py) | Copies a repeat customer's last visit into a draft. `--send-quote` emails their saved quote. |
+| [`send_quote.py`](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/examples/send_quote.py) | Lists saved drafts and quotes, or emails one quote with a link to book it. |
+| [`add_customer.py`](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/examples/add_customer.py) | Adds a customer after checking the email is not in the store yet. |
+| [`provider_pay_report.py`](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/examples/provider_pay_report.py) | Provider pay totals for a pay period, then each provider's payment logs. |
+| [`overdue_invoices.py`](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/examples/overdue_invoices.py) | Unpaid invoices past due. `--remind` sends each one to its customer again. |
 
 ```bash
 python examples/assign_unassigned.py --from 2026-11-16 --to 2026-11-20
@@ -423,7 +423,7 @@ The source is public, the license is not an open source license: noncommercial u
 
 ## License
 
-[PolyForm Noncommercial License 1.0.0](LICENSE). In short:
+[PolyForm Noncommercial License 1.0.0](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/LICENSE). In short:
 
 - **Allowed:** noncommercial use: you, for your own personal purposes with your own BookingKoala account, or a charity, school, public research or government body. Changing the code, and sharing it under the same license.
 - **Not allowed:** any commercial use, your own business included; client work; selling or offering it, or a service built on it.
@@ -434,7 +434,7 @@ The source is public, the license is not an open source license: noncommercial u
   <a href="https://cotlet.dev">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="assets/logo-white.svg">
-      <img src="assets/logo.svg" alt="Cotlet" width="120">
+      <img src="https://raw.githubusercontent.com/cotletdev/bookingkoala-api-mcp-server/main/assets/logo.svg" alt="Cotlet" width="120">
     </picture>
   </a>
 </p>
