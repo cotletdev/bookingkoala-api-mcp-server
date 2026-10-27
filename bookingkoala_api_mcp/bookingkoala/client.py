@@ -118,7 +118,7 @@ def session(ctx: ToolContext) -> Session | None:
 def require_session(ctx: ToolContext) -> Session:
     s = session(ctx)
     if s is None:
-        raise AuthExpiredError("The app signed this account out. Sign in again in Chrome, then reconnect.")
+        raise AuthExpiredError("The app signed this account out. Sign in again in Chrome, then run connect.")
     return s
 
 
@@ -173,7 +173,7 @@ async def api(ctx: ToolContext, method: str, path: str, *, s: Session | None = N
         answer = (body.get("response") if isinstance(body, dict) else None) or {}
         status, message = answer.get("api_status"), str(answer.get("message") or "")
         if status == _SIGNED_OUT:
-            raise AuthExpiredError("The app signed this account out. Sign in again in Chrome, then reconnect.")
+            raise AuthExpiredError("The app signed this account out. Sign in again in Chrome, then run connect.")
         if status == _OK:
             return answer.get("data")
         if status != _CSRF_REFUSED and not message.startswith(_STALE_CSRF):

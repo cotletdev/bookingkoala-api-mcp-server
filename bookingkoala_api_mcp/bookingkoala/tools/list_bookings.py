@@ -1,4 +1,4 @@
-"""List bookings: POST `/api/v6/bookings/search?user_type=admin&status=<s>`."""
+"""List bookings: POST `/api/v6/bookings/search?user_type=admin&status=<s>` (a read sent as POST)."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ from bookingkoala_api_mcp.core.tools import tool
 if TYPE_CHECKING:
     from bookingkoala_api_mcp.core.context import ToolContext
 
-# `authorized` is refused by the app .
+# `authorized` is refused by the app.
 STATUS_FILTERS = ["all", "upcoming", "today", "unassigned", "completed", "pending", "declined", "paused"]
 
 INPUT_SCHEMA: dict[str, Any] = {
