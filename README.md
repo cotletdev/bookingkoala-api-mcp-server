@@ -1,8 +1,36 @@
-# BookingKoala API and MCP server, self-hosted
+# BookingKoala API and MCP server: connect BookingKoala to ChatGPT and Claude
 
 <!-- mcp-name: dev.cotlet/bookingkoala -->
 
-A **BookingKoala API** and a **BookingKoala MCP server** you run on your own computer, in Python, on the session of your own Google Chrome. 17 of the 18 BookingKoala tools we run in production at [Cotlet](https://cotlet.dev/integrations/bookingkoala-api-mcp-server): bookings, drafts and quotes, customers, providers and teams, charges, invoices and the store dashboard.
+**Yes, ChatGPT, Claude and other AI agents can work in your BookingKoala account.** That includes Cursor, Codex, OpenClaw and any MCP client, plus automations in n8n, Make and Zapier. Ask in plain words, and the AI finds unassigned bookings, assigns providers, drafts quotes, follows up on unpaid invoices and reports on your store. It shows you what it will do first and sends nothing to other people until you say so.
+
+This repo is the missing piece: 17 BookingKoala tools for AI assistants and scripts.
+
+## What you can ask
+
+> *Go through the unassigned folder for this week. Give each job to the free provider with the fewest bookings that day, and tell me which jobs nobody can take.*
+>
+> *Thursday is a storm day. Move every Thursday booking to its next visit and email the customers and providers.*
+>
+> *Which invoices are more than 7 days overdue? Send each customer the invoice again.*
+>
+> *How much revenue and provider pay did we have from 1 to 15 November?*
+
+## Two ways to get it
+
+| | [Ready to use, at Cotlet](https://cotlet.dev/integrations/bookingkoala-api-mcp-server?utm_source=github&utm_medium=readme&utm_campaign=bookingkoala&utm_content=two-ways) | Run it yourself, this repo |
+|---|---|---|
+| For | cleaning and home service business owners | developers |
+| Setup | sign in to BookingKoala once, about 5 minutes, nothing to install | Python and a terminal |
+| Works in | ChatGPT and Claude apps, on your phone too, Cursor, Codex, OpenClaw, any MCP client, n8n, Make, Zapier, REST API | Claude Code, Claude Desktop, Cursor, Codex on your computer |
+| Runs | 24/7, your computer can be off | while your computer is on |
+| Price | 7 days free, no card | free |
+
+**[Start free at cotlet.dev →](https://cotlet.dev/signup?app=bookingkoala&utm_source=github&utm_medium=readme&utm_campaign=bookingkoala&utm_content=top-button)**
+
+## Run it yourself
+
+A **BookingKoala API** and a **BookingKoala MCP server** you run on your own computer, in Python, on the session of your own Google Chrome. 17 of the 18 BookingKoala tools we run in production at [Cotlet](https://cotlet.dev/integrations/bookingkoala-api-mcp-server?utm_source=github&utm_medium=readme&utm_campaign=bookingkoala&utm_content=intro): bookings, drafts and quotes, customers, providers and teams, charges, invoices and the store dashboard.
 
 BookingKoala has no public API and no official MCP server. Its API key only connects Zapier and Make, which react to new events and can write back one thing, a lead. This repo gives you both:
 
@@ -10,11 +38,11 @@ BookingKoala has no public API and no official MCP server. Its API key only conn
 - **REST API** on `http://127.0.0.1:8787/api/v1/bookingkoala`, with OpenAPI docs at `/docs`. [Setup](#rest-api)
 - **Python**: `call("list_bookings", status="unassigned")`, plus 12 ready scripts in [`examples/`](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/examples/).
 
-It is for technical people who want to run it themselves, **for noncommercial use only** ([license](#license)). If you want it running 24/7 on a server, kept working when BookingKoala changes its app, for a team or a business, use the [hosted version at cotlet.dev](https://cotlet.dev/integrations/bookingkoala-api-mcp-server).
+Free for your own use, your own business included ([license](#license)).
 
 [![BookingKoala MCP server](https://img.shields.io/badge/BookingKoala%20MCP-17%20tools-6d4aef)](#all-17-tools)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-141318)](#requirements)
-[![License: PolyForm Noncommercial 1.0.0](https://img.shields.io/badge/license-PolyForm%20Noncommercial-141318)](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/LICENSE)
+[![License: Elastic 2.0](https://img.shields.io/badge/license-Elastic%202.0-141318)](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/LICENSE)
 [![MCP Badge](https://lobehub.com/badge/mcp/cotletdev-bookingkoala-api-mcp-server)](https://lobehub.com/mcp/cotletdev-bookingkoala-api-mcp-server)
 
 ```bash
@@ -26,6 +54,7 @@ claude mcp add bookingkoala -- uvx bookingkoala-api-mcp mcp
 
 ## Contents
 
+- [Questions from BookingKoala users](#questions-from-bookingkoala-users)
 - [How it works](#how-it-works)
 - [Requirements](#requirements)
 - [Install](#install)
@@ -40,6 +69,41 @@ claude mcp add bookingkoala -- uvx bookingkoala-api-mcp mcp
 - [Self-hosted or hosted](#self-hosted-or-hosted)
 - [FAQ](#faq)
 - [License](#license)
+
+## Questions from BookingKoala users
+
+**Does BookingKoala have an API?**
+Not a public one. BookingKoala publishes no REST API docs. The API key under Settings > General > Apps & Integrations only connects Zapier and Make: triggers for new or updated bookings, customers, providers, quotes, ratings and invoices, and one action, Create Lead. It cannot look up past bookings, assign a provider, reschedule, cancel or resend an invoice. This repo and [Cotlet](https://cotlet.dev/integrations/bookingkoala-api-mcp-server?utm_source=github&utm_medium=readme&utm_campaign=bookingkoala&utm_content=faq-api) give you 17 BookingKoala tools as a REST API and an MCP server.
+
+**Can I get a BookingKoala API key?**
+BookingKoala's own key only connects Zapier and Make. With Cotlet you get your own API key that works with your BookingKoala store, for scripts, n8n, Make, Zapier or any HTTP client. This repo needs no key: it runs on your computer, on your own BookingKoala session.
+
+**Is there an official ChatGPT integration for BookingKoala?**
+No. BookingKoala has no official ChatGPT or Claude connector. Cotlet is an unofficial one that works today, in the ChatGPT and Claude apps and in any AI agent that takes an MCP server.
+
+**How do I connect BookingKoala to ChatGPT?**
+Sign up at [cotlet.dev](https://cotlet.dev/signup?app=bookingkoala&utm_source=github&utm_medium=readme&utm_campaign=bookingkoala&utm_content=faq-chatgpt), sign in to BookingKoala once in your Cloud Browser there, and add Cotlet to ChatGPT, following the steps in your account. Then ask ChatGPT about your BookingKoala like you would ask an assistant. ChatGPT needs a server on the internet, so this repo alone, running on your computer, does not connect to ChatGPT.
+
+**Can ChatGPT manage my BookingKoala bookings?**
+Yes, with Cotlet. It lists today's and unassigned bookings, assigns providers, reschedules, drafts quotes and checks what is unpaid. It shows you every change first.
+
+**Can I automate BookingKoala with Zapier, Make or n8n?**
+BookingKoala's own key only connects Zapier and Make for new-event triggers and one action, Create Lead. With Cotlet, n8n, Make and Zapier can also read past bookings, assign providers and work with quotes and invoices.
+
+**Can I use it from my phone?**
+Yes, with Cotlet: once it is set up, the ChatGPT and Claude apps on your phone can use BookingKoala for you.
+
+**Do I need to be technical?**
+For Cotlet, no: you sign in to BookingKoala and add Cotlet to ChatGPT or Claude, with step-by-step instructions in your account. This repo is for people who are fine with Python and a terminal.
+
+**Is my BookingKoala account safe?**
+Yes. Neither Cotlet nor this repo sees or stores your BookingKoala password. You sign in yourself, the way you always do, and the AI works on that signed-in session. Anything that reaches other people asks for your OK first: in Cotlet by default, here through your MCP client.
+
+**Is it free?**
+This repo is free, also in your own business. Cotlet is free for 7 days with no card, then one-time credit packs from $29, no subscription. [Pricing](https://cotlet.dev/pricing?utm_source=github&utm_medium=readme&utm_campaign=bookingkoala&utm_content=faq-price).
+
+**I manage BookingKoala for several accounts or clients. Does that work?**
+Yes, with Cotlet. Each BookingKoala login gets its own connection. Write to [contact@cotlet.dev](mailto:contact@cotlet.dev) and tell us how many accounts you manage.
 
 ## How it works
 
@@ -373,7 +437,7 @@ The REST API answers `{"error": "<code>", "message": "..."}`. The MCP server ret
 
 ## Self-hosted or hosted
 
-| | This repo | [Cotlet, hosted](https://cotlet.dev/integrations/bookingkoala-api-mcp-server) |
+| | This repo | [Cotlet, hosted](https://cotlet.dev/integrations/bookingkoala-api-mcp-server?utm_source=github&utm_medium=readme&utm_campaign=bookingkoala&utm_content=compare) |
 |---|---|---|
 | Tools | 17 | 18, with `refund_charge` |
 | Runs | on your computer, while it is on | in the cloud, 24/7 |
@@ -381,15 +445,12 @@ The REST API answers `{"error": "<code>", "message": "..."}`. The MCP server ret
 | When BookingKoala changes its app | `git pull` once we have fixed it | fixed for you, every tool tested daily |
 | Approvals | your MCP client asks per call | assignments, quotes, invoices and refunds wait for your OK, switchable per tool |
 | Works with | MCP clients on your machine, local scripts | Claude.ai and ChatGPT connectors, n8n, Make, Zapier, any HTTP client |
-| Who may use it | you, for noncommercial use | teams, businesses, agencies |
+| Who may use it | you and your own business | you, teams, businesses, agencies |
 | Price | free | free 7-day trial with 2,000 credits, no card; then one-time packs from $29 for 5,000 credits |
 
 On the hosted version a successful call uses 10 credits for most tools, failed calls are free, and the Cloud Browser uses 50 credits a day while it has an app enabled for agents. [Full pricing](https://cotlet.dev/pricing).
 
 ## FAQ
-
-**Does BookingKoala have an official API?**
-Not a public one. BookingKoala publishes no REST API docs. The API key under Settings > General > Apps & Integrations only connects Zapier and Make: triggers for new or updated bookings, customers, providers, quotes, ratings and invoices, and one action, Create Lead. It cannot look up past bookings, assign a provider, reschedule, cancel or resend an invoice. Details: [cotlet.dev/integrations/bookingkoala-api-mcp-server](https://cotlet.dev/integrations/bookingkoala-api-mcp-server).
 
 **Is there a BookingKoala MCP server for Claude, ChatGPT or Cursor?**
 Yes, this one runs on your machine: `bookingkoala-mcp mcp` for Claude Code, Claude Desktop, Cursor and Codex. ChatGPT and Claude.ai connectors need a public HTTPS URL, which the [hosted BookingKoala MCP server](https://cotlet.dev/integrations/bookingkoala-api-mcp-server) gives you.
@@ -413,20 +474,20 @@ Calls fail with `auth_expired`. With Chrome remote debugging on, the server read
 Technically yes, with `BOOKINGKOALA_STORE` and `BOOKINGKOALA_AUTH_TOKEN`. BookingKoala then sees your session from a datacenter IP. For an always-on setup the hosted version keeps your session in your own Cloud Browser on a fixed IP.
 
 **Can I use it for my cleaning business?**
-No. The license allows noncommercial use only, and running your store is business use. For your company, use [Cotlet](https://cotlet.dev) or write to [contact@cotlet.dev](mailto:contact@cotlet.dev).
+For your own cleaning business, yes, free. You may not offer it to others as a hosted or managed service. For client work, use [Cotlet](https://cotlet.dev?utm_source=github&utm_medium=readme&utm_campaign=bookingkoala&utm_content=faq-clients) or write to [contact@cotlet.dev](mailto:contact@cotlet.dev).
 
 **Is it open source?**
-The source is public, the license is not an open source license: noncommercial use only, no business use.
+The source is public under the Elastic License 2.0: free to use and change, also in your own business, but not to resell as a hosted service.
 
 **A tool broke or I need another one.**
 [Open an issue](https://github.com/cotletdev/bookingkoala-api-mcp-server/issues) with the tool name and the error message.
 
 ## License
 
-[PolyForm Noncommercial License 1.0.0](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/LICENSE). In short:
+[Elastic License 2.0](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/LICENSE). In short:
 
-- **Allowed:** noncommercial use: you, for your own personal purposes with your own BookingKoala account, or a charity, school, public research or government body. Changing the code, and sharing it under the same license.
-- **Not allowed:** any commercial use, your own business included; client work; selling or offering it, or a service built on it.
+- **Allowed:** using it for yourself and in your own business, free. Changing the code and sharing it under the same license.
+- **Not allowed:** offering it to others as a hosted or managed service, removing the license notices, getting around its limits.
 
 ---
 
@@ -439,4 +500,4 @@ The source is public, the license is not an open source license: noncommercial u
   </a>
 </p>
 
-Maintained by [Cotlet](https://cotlet.dev) ([@cotletdev](https://x.com/cotletdev)). BookingKoala is a trademark of its owner. This project is unofficial and not affiliated with, endorsed or sponsored by BookingKoala.
+Maintained by [Cotlet](https://cotlet.dev?utm_source=github&utm_medium=readme&utm_campaign=bookingkoala&utm_content=footer) ([@cotletdev](https://x.com/cotletdev)). BookingKoala is a trademark of its owner. This project is unofficial and not affiliated with, endorsed or sponsored by BookingKoala.
