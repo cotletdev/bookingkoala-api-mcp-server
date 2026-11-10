@@ -47,6 +47,8 @@ Free for your own use, your own business included ([license](#license)).
 [![License: Elastic 2.0](https://img.shields.io/badge/license-Elastic%202.0-141318)](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/LICENSE)
 [![MCP Badge](https://lobehub.com/badge/mcp/cotletdev-bookingkoala-api-mcp-server)](https://lobehub.com/mcp/cotletdev-bookingkoala-api-mcp-server)
 
+Also on Odel: https://odel.app/modules/cotlet/bookingkoala
+
 ```bash
 uv tool install bookingkoala-api-mcp                  # or: pip install bookingkoala-api-mcp
 bookingkoala-mcp connect                           # reads your BookingKoala session from Chrome
