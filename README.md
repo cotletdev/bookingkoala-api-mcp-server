@@ -1,4 +1,4 @@
-# BookingKoala API and MCP server: connect BookingKoala to ChatGPT and Claude
+# BookingKoala API integration and MCP server: connect BookingKoala to ChatGPT and Claude
 
 <!-- mcp-name: dev.cotlet/bookingkoala -->
 
@@ -22,13 +22,65 @@ As of November 2026, this repo is the missing piece: 17 BookingKoala tools for A
 |---|---|---|
 | For | cleaning and home service business owners | developers |
 | Setup | sign in to BookingKoala once, about 5 minutes, nothing to install | Python and a terminal |
-| Works in | ChatGPT and Claude apps, on your phone too, Cursor, Codex, OpenClaw, any MCP client, n8n, Make, Zapier, REST API | Claude Code, Claude Desktop, Cursor, Codex on your computer |
+| Works in | ChatGPT and Claude apps, on your phone too, Cursor, Codex, OpenClaw, any MCP client, n8n, Make, Zapier, your own API endpoints (Custom API) | Claude Code, Claude Desktop, Cursor, Codex on your computer |
 | Runs | 24/7, your computer can be off | while your computer is on |
 | Price | 7 days free, no card | free |
 
 Cotlet is best for cleaning and home service business owners who want ChatGPT, Claude or another AI agent to work in BookingKoala for them, with nothing to install.
 
 **[Start free at cotlet.dev →](https://cotlet.dev/signup?app=bookingkoala&utm_source=github&utm_medium=readme&utm_campaign=bookingkoala&utm_content=top-button)**
+
+## What cleaning and home service owners ask their AI to do in BookingKoala
+
+| Job | Ask your AI | Make it repeat |
+|---|---|---|
+| Quote from a new lead | "Make a quote for this new lead from her message and email her the booking link. Show me first." | When a lead comes in |
+| Quotes that did not book | "List quotes sent this week that were not booked and draft a follow-up text for each. Send nothing yet." | Weekly |
+| Unassigned bookings | "Show tomorrow's unassigned bookings and suggest a provider for each. Assign them after my OK." | Daily |
+| Double bookings | "Check next week's schedule for overlapping jobs per provider and tell me which to move." | Daily |
+| Reschedule | "Move the Johnson clean to next Tuesday at 10:00 and check the provider is free." | When a customer asks |
+| Weekly numbers | "Give me last week's revenue, tips, provider pay, bookings and declined charges." | Weekly |
+| Declined charges | "List bookings with declined or pending charges and draft a message to each customer." | Daily |
+| Provider pay | "Total each provider's pay and hours from last week's bookings for payroll." | Weekly |
+| Bookings in a spreadsheet | "Put every booking from this month in a spreadsheet with customer, service, provider and price." | Your own endpoint, called from Google Sheets |
+| Review requests | "List customers whose job was completed yesterday and draft a Google review request for each. Send nothing yet." | Daily |
+| New customers to GoHighLevel | "Add this week's new BookingKoala customers to GoHighLevel as contacts with their next booking." | Your own endpoint, called from GoHighLevel or n8n |
+| Unpaid invoices | "List unpaid invoices older than 7 days and resend them after my OK." | Weekly |
+| Leaving BookingKoala | "Export all my customers, bookings, quotes and invoices before I switch to another system." | Once |
+
+Your AI asks you before it books, reschedules, sends a quote or an invoice, or changes anything. A refund waits for your OK on each call, and Cotlet never charges a card for you.
+
+## Your own BookingKoala API, built with Cotlet (hosted)
+
+BookingKoala gives you no public API, only Zapier and Make triggers. With Cotlet you build your own: your AI does the job once in your Cloud Browser, you save it as an endpoint, and you call it from Google Sheets, GoHighLevel, Zapier, Make, n8n, your own code.
+
+Examples you can build in a few minutes (none of them exists until you build it):
+
+| Endpoint you build | What it returns or does |
+|---|---|
+| `bookings-for-day` | bookings for a date with customer, service, provider, price and status |
+| `unassigned-bookings` | bookings that have no provider yet |
+| `open-quotes` | quotes sent but not booked, with customer and price |
+| `new-customers` | customers added since a date, with email and phone |
+| `declined-charges` | bookings with declined or pending charges |
+| `provider-pay` | pay and hours per provider for a period |
+| `weekly-summary` | revenue, tips, provider pay, bookings and ratings for a period |
+| `unpaid-invoices` | invoices with amount due and days since sent |
+| `assign-provider` | assigns a provider or team to a booking (writes only after you allow it) |
+
+Call it with your Cotlet API key, JSON in and JSON out:
+
+```bash
+curl -X POST https://cotlet.dev/api/v1/custom/bookings-for-day \
+  -H "Authorization: Bearer $COTLET_API_KEY" -H "Content-Type: application/json" -d '{}'
+```
+
+Limits: one call runs up to 90 seconds, writes wait for your consent, payments are blocked. Start here: https://cotlet.dev/app/custom-api/new?app=bookingkoala
+
+## Find it on Cotlet.dev
+
+- [BookingKoala MCP server on Cotlet.dev](https://cotlet.dev/integrations/bookingkoala-api-mcp-server?utm_source=github&utm_medium=readme&utm_campaign=bookingkoala&utm_content=old-repo)
+- [Does BookingKoala have an API or MCP server?](https://cotlet.dev/api-mcp-status/bookingkoala?utm_source=github&utm_medium=readme&utm_campaign=bookingkoala&utm_content=old-repo)
 
 ## Run it yourself
 
@@ -37,7 +89,7 @@ A **BookingKoala API** and a **BookingKoala MCP server** you run on your own com
 BookingKoala has no public API and no official MCP server. Its API key only connects Zapier and Make, which react to new events and can write back one thing, a lead. This repo gives you both:
 
 - **MCP server** for Claude Code, Claude Desktop, Cursor, Codex and any MCP client, over stdio or HTTP. [Setup](#mcp-server)
-- **REST API** on `http://127.0.0.1:8787/api/v1/bookingkoala`, with OpenAPI docs at `/docs`. [Setup](#rest-api)
+- **REST API** on `http://127.0.0.1:8787/api/v1/bookingkoala`, with OpenAPI docs at `/docs`. [Setup](#rest-api-local-this-repo)
 - **Python**: `call("list_bookings", status="unassigned")`, plus 12 ready scripts in [`examples/`](https://github.com/cotletdev/bookingkoala-api-mcp-server/blob/main/examples/).
 
 Free for your own use, your own business included ([license](#license)).
@@ -64,7 +116,7 @@ claude mcp add bookingkoala -- uvx bookingkoala-api-mcp mcp
 - [Install](#install)
 - [Connect your Chrome](#connect-your-chrome)
 - [MCP server](#mcp-server)
-- [REST API](#rest-api)
+- [REST API](#rest-api-local-this-repo)
 - [Python and the example scripts](#python-and-the-example-scripts)
 - [All 17 tools](#all-17-tools)
 - [Configuration](#configuration)
@@ -77,13 +129,47 @@ claude mcp add bookingkoala -- uvx bookingkoala-api-mcp mcp
 ## Questions from BookingKoala users
 
 **Does BookingKoala have an API?**
-Not a public one. BookingKoala publishes no REST API docs. The API key under Settings > General > Apps & Integrations only connects Zapier and Make: triggers for new or updated bookings, customers, providers, quotes, ratings and invoices, and one action, Create Lead. It cannot look up past bookings, assign a provider, reschedule, cancel or resend an invoice. This repo and [Cotlet](https://cotlet.dev/integrations/bookingkoala-api-mcp-server?utm_source=github&utm_medium=readme&utm_campaign=bookingkoala&utm_content=faq-api) give you 17 BookingKoala tools as a REST API and an MCP server.
+
+Not a public one (checked 22 Nov 2026). The API key in Settings > General > Apps and Integrations only connects Zapier and Make, and "Open API" is the most-voted request on BookingKoala's idea board. With Cotlet you build your own endpoints that work in your signed-in BookingKoala account.
+
+**Can Zapier reschedule a BookingKoala booking or assign a provider?**
+
+BookingKoala's Zapier app gives triggers such as new bookings, quotes and charges, not those actions. With Cotlet your AI reschedules bookings, assigns providers and sends quotes after your OK, and you can call them as your own endpoints from Zapier or Make.
+
+**Is there an official BookingKoala MCP server or ChatGPT app?**
+
+No. BookingKoala has no MCP server and no ChatGPT or Claude app. Cotlet is unofficial and works in the ChatGPT and Claude apps and in any MCP client.
+
+**How do I connect BookingKoala to GoHighLevel?**
+
+Build a `new-customers` endpoint and call it from a GoHighLevel workflow, n8n or Make on a schedule. Add `bookings-for-day` to bring booking status back into GoHighLevel.
+
+**How do I add every BookingKoala booking to Google Sheets?**
+
+BookingKoala's Zapier and Make triggers add new bookings as they come. For past bookings, changes and provider pay, build a `bookings-for-day` or `provider-pay` endpoint and call it from Google Sheets.
+
+**Can AI send me a weekly summary of revenue, tips and provider pay?**
+
+Yes. Your AI reads the dashboard and charges in your account and sends you revenue, tips, provider pay, bookings and declined charges for the week.
+
+**Can AI ask for a Google review after each completed job?**
+
+It lists yesterday's completed jobs and drafts a review request for each customer. Nothing goes out until you say yes.
+
+**Can an AI agent stop double bookings?**
+
+It checks the schedule per provider for overlapping jobs and tells you which ones to move. It moves a booking only after your OK.
+
+**How do I export all my customers and bookings before I switch?**
+
+Your AI downloads your customers, bookings, quotes and invoices from the screens your login opens, so you keep everything when you move.
+
+**Is there an owner app for BookingKoala on my phone?**
+
+BookingKoala's mobile app is for providers. With Cotlet, the ChatGPT and Claude apps on your phone can check and change bookings for you.
 
 **Can I get a BookingKoala API key?**
 BookingKoala's own key only connects Zapier and Make. With Cotlet you get your own API key that works with your BookingKoala store, for scripts, n8n, Make, Zapier or any HTTP client. This repo needs no key: it runs on your computer, on your own BookingKoala session.
-
-**Is there an official ChatGPT integration for BookingKoala?**
-No. BookingKoala has no official ChatGPT or Claude connector. Cotlet is an unofficial one that works today, in the ChatGPT and Claude apps and in any AI agent that takes an MCP server.
 
 **How do I connect BookingKoala to ChatGPT?**
 Sign up at [cotlet.dev](https://cotlet.dev/signup?app=bookingkoala&utm_source=github&utm_medium=readme&utm_campaign=bookingkoala&utm_content=faq-chatgpt), sign in to BookingKoala once in your Cloud Browser there, and add Cotlet to ChatGPT, following the steps in your account. Then ask ChatGPT about your BookingKoala like you would ask an assistant. ChatGPT needs a server on the internet, so this repo alone, running on your computer, does not connect to ChatGPT.
@@ -276,7 +362,7 @@ Then ask your agent things like:
 >
 > *How much revenue and provider pay did we have from 1 to 15 November?*
 
-## REST API
+## REST API (local, this repo)
 
 ```bash
 bookingkoala-mcp serve             # http://127.0.0.1:8787, MCP at /mcp, docs at /docs
@@ -448,7 +534,7 @@ The REST API answers `{"error": "<code>", "message": "..."}`. The MCP server ret
 | BookingKoala session | your Chrome, cookies in a local file | your own Cloud Browser in the EU, profile encrypted with AES-256-GCM |
 | When BookingKoala changes its app | `git pull` once we have fixed it | fixed for you, every tool tested daily |
 | Approvals | your MCP client asks per call | assignments, quotes, invoices and refunds wait for your OK, switchable per tool |
-| Works with | MCP clients on your machine, local scripts | Claude.ai and ChatGPT connectors, n8n, Make, Zapier, any HTTP client |
+| Works with | MCP clients on your machine, local scripts | Claude.ai and ChatGPT connectors, n8n, Make, Zapier, any HTTP client through your own endpoints (Custom API) |
 | Who may use it | you and your own business | you, teams, businesses, agencies |
 | Price | free | free 7-day trial with 2,000 credits, no card; then one-time packs from $29 for 5,000 credits |
 
