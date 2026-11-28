@@ -82,6 +82,150 @@ Limits: one call runs up to 90 seconds, writes wait for your consent, payments a
 - [BookingKoala MCP server on Cotlet.dev](https://cotlet.dev/integrations/bookingkoala-api-mcp-server?utm_source=github&utm_medium=readme&utm_campaign=bookingkoala&utm_content=old-repo)
 - [Does BookingKoala have an API or MCP server?](https://cotlet.dev/api-mcp-status/bookingkoala?utm_source=github&utm_medium=readme&utm_campaign=bookingkoala&utm_content=old-repo)
 
+## What you can ask your AI to do in BookingKoala
+
+These are real jobs BookingKoala users asked about. Cotlet lets ChatGPT, Claude or any MCP client do them in your own signed-in BookingKoala account.
+
+### Bookings and scheduling
+
+#### How do I sync every BookingKoala booking to Google Calendar, including edits and cancellations, so my calendar stays in step?
+
+Partly. BookingKoala has a Google Calendar sync setting, and owners report edits and cancellations drifting. With Cotlet, your agent compares upcoming BookingKoala bookings with your Google Calendar, signed in in the same Cloud Browser, and fixes the events that differ. Nothing changes until you say yes.
+
+Ask your agent: "Compare next week's BookingKoala bookings with my Google Calendar and list events that are missing, moved or cancelled. Show me before fixing."
+
+As an API endpoint: Yes. Save the comparison as an endpoint in Cotlet and call it every morning from n8n, Make or Zapier.
+
+#### Can an AI agent check my BookingKoala schedule and stop double bookings or overlapping jobs?
+
+Yes. With Cotlet, your agent reads each provider's bookings for the coming days in your signed-in BookingKoala, lists overlaps and proposes who could take each job. Reassigning a provider waits until you say yes.
+
+Ask your agent: "Read next week's BookingKoala bookings per provider, list any overlapping jobs and suggest which free provider could take each one."
+
+As an API endpoint: Yes. Save the overlap check as an endpoint in Cotlet and call it every evening from n8n, Make or Zapier.
+
+#### Can AI mark a BookingKoala booking as paid or reschedule it for me?
+
+Partly. BookingKoala's Zapier app gives triggers, not these actions. With Cotlet, your agent reschedules a booking or notes a payment in your signed-in account. Charging cards stays in BookingKoala and Cotlet does not pay. Nothing changes until you say yes.
+
+Ask your agent: "Reschedule the BookingKoala booking for Dana Whitfield to Friday at 10:00 and show me the change before saving. Do not charge anything."
+
+#### How do I get an owner app for BookingKoala so I can change bookings from my phone?
+
+Partly. BookingKoala's mobile app is for providers and owners ask for an admin app on its idea board. With Cotlet, you ask ChatGPT or Claude on your phone to check or change bookings in your signed-in account. Nothing changes until you say yes.
+
+Ask your agent: "Show me today's BookingKoala bookings with provider and address, and move the 2 pm job to tomorrow if I say yes."
+
+### Leads and quotes
+
+#### Can AI create a quote in BookingKoala from a new lead and email the customer a personalized booking link?
+
+Yes. BookingKoala has a Send a quote screen. With Cotlet, your agent reads the new lead, builds the quote in your signed-in account and drafts the email with the booking link. Nothing is sent until you say yes.
+
+Ask your agent: "Read my newest BookingKoala lead, build a quote for the service they asked about and draft the email with the booking link. Do not send it."
+
+As an API endpoint: Yes. Save the quote step as an endpoint in Cotlet and call it from a form tool, n8n, Make or Zapier for each new lead.
+
+#### Can AI follow up with people who abandoned the BookingKoala booking form by text or email?
+
+Yes. BookingKoala's Leads module has an Abandoned Cart (hot leads) funnel. With Cotlet, your agent reads those leads in your signed-in account and drafts a short text or email for each. Nothing is sent until you say yes.
+
+Ask your agent: "List today's abandoned BookingKoala booking leads and draft a short follow-up text for each with a link to finish the booking."
+
+As an API endpoint: Yes. Save the leads check as an endpoint in Cotlet and call it every morning from n8n, Make or Zapier.
+
+#### How do I connect BookingKoala to GoHighLevel so new leads, customers and booking status move both ways?
+
+Partly. BookingKoala has no native GoHighLevel link. With Cotlet, your agent copies new leads and customers between BookingKoala and GoHighLevel, signed in in the same Cloud Browser, and updates booking status. Nothing changes until you say yes.
+
+Ask your agent: "Compare new BookingKoala customers with GoHighLevel contacts and list the ones missing in GoHighLevel. Show me before adding them."
+
+As an API endpoint: Yes. Save the sync as an endpoint in Cotlet and call it every hour from n8n, Make or Zapier.
+
+#### How do I embed the BookingKoala booking form and customer login into my WordPress or Wix site without the booking summary breaking?
+
+Not on its own. BookingKoala has help pages for embedding its forms. Cotlet works in the signed-in apps and does not edit your website's code. Your agent can read your embed settings in BookingKoala and your page in WordPress or Wix, and tell you what differs.
+
+Ask your agent: "Read my BookingKoala embed settings and the Wix page that holds the form and list what could make the booking summary not float."
+
+### Texts, reviews and reports
+
+#### How do I make BookingKoala text customers from my own Twilio or GoHighLevel number, and what do I need to register first (A2P 10DLC)?
+
+Not on its own. BookingKoala uses your own Twilio account for texts. Cotlet does not send SMS itself and does not register numbers for you. Your agent can read your Twilio and BookingKoala settings and tell you which steps are missing. Nothing changes until you say yes.
+
+Ask your agent: "Read my BookingKoala SMS settings and my Twilio console and list what is missing for texts to send, including A2P registration status."
+
+#### Can I connect BookingKoala to OpenPhone or another business phone so I can text customers two ways from one inbox?
+
+Not on its own. BookingKoala's help centre shows no two-way text inbox. With Cotlet, your agent can copy a customer's booking details into your phone app, signed in in the same Cloud Browser, and draft the text. Nothing is sent until you say yes.
+
+Ask your agent: "Find the BookingKoala customer Dana Whitfield, read her next booking and draft a reminder text I can send from OpenPhone."
+
+#### Can AI ask for a Google review after each completed BookingKoala job and thank 5-star customers?
+
+Yes. BookingKoala has automatic reviews that turn an internal rating into an external review link. With Cotlet, your agent lists completed jobs and ratings in your signed-in account and drafts thank-you messages for 5-star customers. Nothing is sent until you say yes.
+
+Ask your agent: "List BookingKoala jobs completed this week with their rating and draft a short thank-you for every 5-star customer with my Google review link."
+
+As an API endpoint: Yes. Turn the review check into an endpoint in Cotlet and call it at the end of each day from n8n, Make or Zapier.
+
+#### Can AI send me a weekly summary of revenue, tips, provider hours and declined charges from BookingKoala?
+
+Yes. BookingKoala has Reports and Booking Time Logs. With Cotlet, your agent reads revenue, tips, provider hours and declined charges for the week in your signed-in account and writes one short summary for you.
+
+Ask your agent: "Summarise last week in BookingKoala: revenue, tips, provider hours and declined charges. Point out anything unusual."
+
+As an API endpoint: Yes. Save the summary as an endpoint in Cotlet and call it every Monday from n8n, Make or Zapier to email it to you.
+
+#### How do I use Zapier or Make to add every new BookingKoala booking as a row in Google Sheets for payroll and reporting?
+
+Yes. BookingKoala has Zapier and Make apps and a Google Sheets sync. With Cotlet, your agent reads the day's bookings in your signed-in account and adds one row per booking to your sheet, signed in in the same Cloud Browser. Nothing is added until you say yes.
+
+Ask your agent: "Read today's BookingKoala bookings and add a row per booking to my Google Sheet with customer, provider, date, service and price."
+
+As an API endpoint: Yes. Save the day's booking read as an endpoint in Cotlet and call it every evening from n8n, Make or Zapier.
+
+### Accounting and provider pay
+
+#### How do I connect BookingKoala to QuickBooks Online so invoices and payments land in my books without retyping?
+
+Partly. BookingKoala has a QuickBooks overview and an Invoices module. With Cotlet, your agent reads invoices and payments in BookingKoala, compares them with QuickBooks, signed in in the same Cloud Browser, and lists what is missing. Nothing changes until you say yes.
+
+Ask your agent: "Compare this month's BookingKoala invoices and payments with QuickBooks Online and list the ones missing in QuickBooks. Show me before adding any."
+
+As an API endpoint: Yes. Save the comparison as an endpoint in Cotlet and call it every week from n8n, Make or Zapier.
+
+#### How do I automate weekly cleaner pay from BookingKoala time logs and send the payouts?
+
+Partly. BookingKoala has Booking Time Logs and a Provider payments section. With Cotlet, your agent totals each provider's hours and pay for the week in your signed-in account and gives you a table. Cotlet does not send the payouts, you do that in BookingKoala.
+
+Ask your agent: "Total each provider's hours and pay in BookingKoala for last week from the Booking Time Logs and give me a table for payroll."
+
+As an API endpoint: Yes. Save the weekly totals as an endpoint in Cotlet and call it every Monday from n8n, Make or Zapier.
+
+### Exports and switching
+
+#### How do I export all my customers and bookings from BookingKoala to CSV before I switch to another system?
+
+Yes. BookingKoala exports customers and providers to CSV and has a bigger bookings CSV since its August 2026 release. With Cotlet, your agent pulls customers, providers and bookings from your signed-in account into one spreadsheet.
+
+Ask your agent: "Export all my BookingKoala customers, providers and bookings into one spreadsheet with a sheet for each."
+
+As an API endpoint: Yes. Save the export as an endpoint in Cotlet and call it every month from n8n, Make or Zapier to keep a backup in Google Sheets.
+
+#### How do I import my customer list from ZenMaid or Launch27 into BookingKoala?
+
+Yes. BookingKoala has a customer import tool for CSV files. With Cotlet, your agent reads the customers in your signed-in ZenMaid or Launch27, shapes them into the import columns and runs the import in BookingKoala. Nothing changes until you say yes.
+
+Ask your agent: "Read my customers from ZenMaid, build a BookingKoala import file and show me the first ten rows before importing."
+
+#### How do I move off BookingKoala without losing my domain, my Google ranking or my customer data?
+
+Partly. Cotlet cannot transfer a domain or move Google rankings. With Cotlet, your agent exports customers, providers and bookings from your signed-in BookingKoala and lists the pages and forms on your site that point to it.
+
+Ask your agent: "Export my BookingKoala customers and bookings and list the pages on my website that embed BookingKoala forms or link to it."
+
 ## Run it yourself
 
 A **BookingKoala API** and a **BookingKoala MCP server** you run on your own computer, in Python, on the session of your own Google Chrome. 17 of the 18 BookingKoala tools we run in production at [Cotlet](https://cotlet.dev/integrations/bookingkoala-api-mcp-server?utm_source=github&utm_medium=readme&utm_campaign=bookingkoala&utm_content=intro): bookings, drafts and quotes, customers, providers and teams, charges, invoices and the store dashboard.
